@@ -21,7 +21,7 @@
     <ClCompile Include="splitline.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="没用的api啥的.cpp">
+    <ClCompile Include="没用的api啥的.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

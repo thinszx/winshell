@@ -142,7 +142,7 @@
   <ItemGroup>
     <ClCompile Include="exec1.c" />
     <ClCompile Include="splitline.c" />
-    <ClCompile Include="没用的api啥的.cpp" />
+    <ClCompile Include="没用的api啥的.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

@@ -22,20 +22,29 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="没用的api啥的.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="controlflow.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="process.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="winshell.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="test.sh">
-      <Filter>源文件</Filter>
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="iftest.sh">
+      <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -168,3 +168,8 @@ void* realloc_s(void* p, size_t n) {
 	}
 	return rv;
 }
+
+void fatal(char* s1, char* s2, int n) {
+	//fprintf_s(stderr, "Error: %s, %s\n", s1, s2);
+	//exit(n);
+}

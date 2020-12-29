@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <Windows.h>
 
-#define DEBUG
-
 int main()
 
 /*
@@ -31,7 +29,8 @@ DWORD WaitForSingleObject(
 #ifdef DEBUG
     // 打开文件
     FILE* fp;
-	errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\test.sh", "r");
+	// errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\test.sh", "r");
+    errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\iftest.sh", "r");
 	if (fp == NULL || err != 0) {
 		printf_s("Failed to open file!");
         return -1;
@@ -44,7 +43,9 @@ DWORD WaitForSingleObject(
             break;
         if (*buf == '\0')   // 空行的情况
             continue;
-        
+        char** args = splitline(buf);
+        process(args);
+        /* 方便起见，这一部分在process.c中封装成了函数供其他程序调用
         wchar_t* arg = generate_cmd(buf);
         STARTUPINFO si = { sizeof(si) };
 
@@ -58,6 +59,13 @@ DWORD WaitForSingleObject(
             // 等待进程结束，等待时间为永久
             DWORD status = WaitForSingleObject(pi.hProcess, INFINITE);
 
+            // 检查进程结束的状态码
+            DWORD dwErr;
+            GetExitCodeProcess(pi.hProcess, &dwErr);
+            if (dwErr)
+                printf("Failed to execute command, exit code %d\n", dwErr);
+            // printf_s("Exit code: %d\n", dwErr); // 错误时输出为1
+
             if (status == WAIT_OBJECT_0) {
                 printf("PID = %d is closed!\n\n", pi.dwProcessId);
             }
@@ -68,7 +76,7 @@ DWORD WaitForSingleObject(
         }
         else {
             printf("Application NOT running! \t Error code %d", GetLastError());
-        }
+        }*/
         /*
 		char** args = splitline(buf);
 		for (int i = 0; args[i] != NULL; i++) {
@@ -76,7 +84,7 @@ DWORD WaitForSingleObject(
 		}
 		//printf_s("arg[%d]%s\n", i, args[i]);
 		freelist(args);*/
-	}/*
+	}/* 这部分本来就没用
 	for (int i = 0; args[i] != NULL; i++) {
 		printf_s("arg[%d]%s\n", i, args[i]);
 	}*/
@@ -123,10 +131,10 @@ wchar_t* generate_cmd(char* str) {
     size_t converted = 0;
     wchar_t* cmdstr = char2wchar(str, &converted);
     wchar_t* cmdall = malloc_s((3 + converted) * sizeof(wchar_t));
-    memset(cmdall, 0, sizeof(cmdall));
+    memset(cmdall, 0, (3 + converted) * sizeof(wchar_t));
     errno_t err = 0;
     //wchar_t* cmdall = L"/C ";
-    err = wcscat_s(cmdall, 3+converted, L"/C ");
+    err = wcscat_s(cmdall, 3 + converted, L"/C ");
     err = wcscat_s(cmdall, 3 + converted, cmdstr);
     if (err != 0) {
         printf_s("Failed to generate command line!");

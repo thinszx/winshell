@@ -141,6 +141,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="exec1.c" />
+    <ClCompile Include="controlflow.c" />
+    <ClCompile Include="process.c" />
     <ClCompile Include="splitline.c" />
     <ClCompile Include="没用的api啥的.c" />
   </ItemGroup>
@@ -149,6 +151,7 @@
     <ClInclude Include="winshell.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="iftest.sh" />
     <None Include="test.sh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

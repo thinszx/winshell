@@ -7,7 +7,7 @@
 #define is_blank(x) ((x) == ' ' || (x) == '\t')
 
 enum states { NO_IF, SAW_IF, SAW_THEN, SAW_ELSE };	// 用作流程控制，将当前指令状态分为多种可能
-enum ok_to_execute { DONT_EXEC, OK_EXEC };			// 流程控制的处理结果
+enum ok_to_execute { DONT_EXEC, OK_EXEC, SYN_ERR };			// 流程控制的处理结果
 
 /* 定义在splitline.c中 */
 char* readline(FILE* fp);
@@ -32,8 +32,11 @@ int read_loop_block(FILE* fp);
 
 /* 定义在controlflow2.c中，用作流程控制 */
 int if_check(char* cmd);
+int save_env();
+int restore_env();
+void set_ifenv();
 
 /* 定义在process.c中，用作进程执行 */
-DWORD process(char** args);
+DWORD process(char* args);
 DWORD execute(char** args);
 char* concatenate_char_array(char** arr);

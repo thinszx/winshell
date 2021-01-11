@@ -15,19 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="exec1.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="splitline.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="没用的api啥的.c">
       <Filter>资源文件</Filter>
     </ClCompile>
+    <ClCompile Include="exec1.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
     <ClCompile Include="controlflow.c">
-      <Filter>源文件</Filter>
+      <Filter>资源文件</Filter>
     </ClCompile>
     <ClCompile Include="process.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="controlflow2.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="exec2.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="process2.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,12 +47,18 @@
     <ClInclude Include="winshell.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="winshell2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="test.sh">
       <Filter>资源文件</Filter>
     </None>
     <None Include="iftest.sh">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="multiif.sh">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

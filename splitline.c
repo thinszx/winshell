@@ -12,10 +12,15 @@
 
 char* readline(FILE* fp) {	// 系统会自动偏移文件指针
 	char* buf = (char*)malloc_s(sizeof(char));	// 读入缓冲区
-	int bufsize = 0;								// 缓冲区大小
-	int pos = 0;									// 当前读取到的位置
-	int ch;											// 读入的字符
+	int bufsize = 0;							// 缓冲区大小
+	int pos = 0;								// 当前读取到的位置
+	int ch;										// 读入的字符
+	int begin = 1;								// 用来去除每行开始的空白字符，当读到第一个非空字符时，将其置0
 	while ((ch = getc(fp)) != EOF) {	// 当前尚未读到文件末尾
+		if (begin == 1 && is_blank(ch))
+			continue;
+		else
+			begin = 0;	// 读到第一个非空字符时，将开始空白标志置0
 		if (pos + 1 >= bufsize) {		// +1是为了给\0分配空间
 			if (bufsize == 0) {			// 当目前尚未有任何空间时，默认分配一个BUFSIZ，默认为512
 				buf = (char*)realloc_s(buf, BUFSIZ);

@@ -21,15 +21,6 @@
     <ClCompile Include="没用的api啥的.c">
       <Filter>资源文件</Filter>
     </ClCompile>
-    <ClCompile Include="exec1.c">
-      <Filter>资源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="controlflow.c">
-      <Filter>资源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="process.c">
-      <Filter>资源文件</Filter>
-    </ClCompile>
     <ClCompile Include="controlflow2.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -37,6 +28,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="process2.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="controlflow.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="exec1.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="process.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,6 +59,15 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="multiif.sh">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="lessfi.sh">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="fail-if.sh">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="plusfi.sh">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

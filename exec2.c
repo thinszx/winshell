@@ -31,7 +31,10 @@ DWORD WaitForSingleObject(
     FILE* fp;
     // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\test.sh", "r");
     // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\iftest.sh", "r");
-    errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\multiif.sh", "r");
+    // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\multiif.sh", "r");
+    // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\fail-if.sh", "r");
+    // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\lessfi.sh", "r");
+    errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\plusfi.sh", "r");
     if (fp == NULL || err != 0) {
         printf_s("Failed to open file!");
         return -1;

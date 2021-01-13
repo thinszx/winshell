@@ -40,3 +40,6 @@ void set_ifenv();
 DWORD process(char* args);
 DWORD execute(char** args);
 char* concatenate_char_array(char** arr);
+
+/* eval.c */
+// char* getvar(char** srcp);

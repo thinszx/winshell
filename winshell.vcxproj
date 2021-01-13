@@ -155,8 +155,11 @@
     <ClInclude Include="winshell2.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="fail-if.sh" />
     <None Include="iftest.sh" />
+    <None Include="lessfi.sh" />
     <None Include="multiif.sh" />
+    <None Include="plusfi.sh" />
     <None Include="test.sh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

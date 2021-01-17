@@ -141,16 +141,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="controlflow2.c" />
+    <ClCompile Include="eval.c" />
     <ClCompile Include="exec1.c" />
     <ClCompile Include="controlflow.c" />
     <ClCompile Include="exec2.c" />
+    <ClCompile Include="loop.c" />
     <ClCompile Include="process.c" />
     <ClCompile Include="process2.c" />
     <ClCompile Include="splitline.c" />
+    <ClCompile Include="varlib.c" />
     <ClCompile Include="没用的api啥的.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="varlib.h" />
     <ClInclude Include="winshell.h" />
     <ClInclude Include="winshell2.h" />
   </ItemGroup>
@@ -158,9 +163,16 @@
     <None Include="fail-if.sh" />
     <None Include="iftest.sh" />
     <None Include="lessfi.sh" />
+    <None Include="loop-if.sh" />
+    <None Include="loop.sh" />
     <None Include="multiif.sh" />
     <None Include="plusfi.sh" />
     <None Include="test.sh" />
+    <None Include="var.sh" />
+    <None Include="var_assign.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="winshell.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

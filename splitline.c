@@ -21,7 +21,7 @@ char* readline(FILE* fp) {	// 系统会自动偏移文件指针
 			continue;
 		else
 			begin = 0;	// 读到第一个非空字符时，将开始空白标志置0
-		if (pos + 1 >= bufsize) {		// +1是为了给\0分配空间
+		if (pos + 2 >= bufsize) {		// +1是为了给\0分配空间，这里为了防止后面有$的情况就多加了一个，可能会有资源浪费...
 			if (bufsize == 0) {			// 当目前尚未有任何空间时，默认分配一个BUFSIZ，默认为512
 				buf = (char*)realloc_s(buf, BUFSIZ);
 			}
@@ -30,11 +30,16 @@ char* readline(FILE* fp) {	// 系统会自动偏移文件指针
 			}
 			bufsize += BUFSIZ;	// 更新缓冲区大小
 		}
-		//如果当前的字符为'\'，则证明后面的字符需要进行转义，此时要把后面的字符也读进来
+		// 如果当前的字符为'\'，则证明后面的字符需要进行转义，此时要把后面的字符也读进来
 		if (ch == '\\') {
 			ch = getc(fp);
-			if (ch != EOF) {
+			if (ch != EOF && ch!='$') {	 // 防止\$abc这样的字符串被识别成变量abc，这里不能对$转义
 				buf[pos++] = ch;
+				continue;
+			}
+			else if (ch == '$') {	// 前面+2保证了这里不会错
+				buf[pos++] = '\\';
+				buf[pos++] = '$';
 				continue;
 			}
 		}
@@ -175,6 +180,6 @@ void* realloc_s(void* p, size_t n) {
 }
 
 void fatal(char* s1, char* s2, int n) {
-	//fprintf_s(stderr, "Error: %s, %s\n", s1, s2);
-	//exit(n);
+	fprintf_s(stderr, "Error: %s, %s\n", s1, s2);
+	exit(n);
 }

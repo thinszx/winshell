@@ -41,7 +41,9 @@ int if_check(char *cmd) {
 			syn_err((char*)"to many if levels(more than 10)");	// if嵌套语法错误
 			return SYN_ERR;
 		}
-		if (if_mode != NO_IF) {
+		if (if_mode != SAW_THEN && laststat != 0)
+			return DONT_EXEC;
+		if (if_mode != NO_IF) {	// 当前if成功执行
 			set_ifenv();	// 开始进行嵌套if的执行
 			// return DONT_EXEC;
 		}
@@ -59,21 +61,21 @@ int if_check(char *cmd) {
 
 	// 检测then else fi
 	// TODO: 检测elif
-	if (strcmp(cmd, "then") == 0) {	// then
+	if (strncmp(cmd, "then", 4) == 0) {	// then
 		if (if_mode != SAW_IF)
 			syn_err((char*)"\'then\' unexpected");
 		else
 			if_mode = SAW_THEN;
 		return DONT_EXEC;
 	}
-	if (strcmp(cmd, "else") == 0) {	// else
+	if (strncmp(cmd, "else", 4) == 0) {	// else
 		if (if_mode != SAW_THEN)
 			syn_err((char*)"\'else\' unexpectd");
 		else
 			if_mode = SAW_ELSE;
 		return DONT_EXEC;
 	}
-	if (strcmp(cmd, "fi") == 0) {	// fi
+	if (strncmp(cmd, "fi", 2) == 0) {	// fi
 		if (if_mode != SAW_THEN && if_mode != SAW_ELSE)
 			syn_err((char*)"\'fi\' unexpected");
 		else
@@ -117,6 +119,13 @@ int save_env() {
 	stack.top++;
 	stack.fi_empty++;
 	return 0;
+}
+
+int check_inside(char* cmd) {
+	if (strncmp(cmd, "echo ", 5) == 0)
+		return 1;
+	else
+		return 0;
 }
 
 // 恢复原有的if环境

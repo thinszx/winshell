@@ -33,8 +33,8 @@ DWORD execute(char** args) {
 	// 检查进程结束的状态码
 	DWORD dwErr = 0;
 	if (OK) { // 进程创建成功
-		printf("Applicaiton is running\n");
-		printf("PID = %d\n", pi.dwProcessId);
+		// printf("Applicaiton is running\n");
+		// printf("PID = %d\n", pi.dwProcessId);
 
 		// 等待进程结束，等待时间为永久
 		DWORD status = WaitForSingleObject(pi.hProcess, INFINITE);
@@ -45,7 +45,7 @@ DWORD execute(char** args) {
 		// printf_s("Exit code: %d\n", dwErr); // 错误时输出为1
 
 		if (status == WAIT_OBJECT_0) {
-			printf("PID = %d is closed!\n\n", pi.dwProcessId);
+			// printf("PID = %d is closed!\n\n", pi.dwProcessId);
 		}
 		free(buf);
 		free(arg);

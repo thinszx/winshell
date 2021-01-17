@@ -1,5 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "pch.h"
 #include "winshell2.h"
+#include "varlib.h"
 #include <stdio.h>
 #include <Windows.h>
 
@@ -34,7 +36,9 @@ DWORD WaitForSingleObject(
     // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\multiif.sh", "r");
     // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\fail-if.sh", "r");
     // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\lessfi.sh", "r");
-    errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\plusfi.sh", "r");
+    // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\plusfi.sh", "r");
+    // errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\var_assign.sh", "r");
+    errno_t err = fopen_s(&fp, "C:\\Users\\12176\\Desktop\\操作系统课设\\winshell\\loop.sh", "r");
     if (fp == NULL || err != 0) {
         printf_s("Failed to open file!");
         return -1;
@@ -42,16 +46,52 @@ DWORD WaitForSingleObject(
 
     int i = 0;
     while (TRUE) {
+        // char newstr[MAXCMDLEN];
         char* buf = readline(fp);
         if (buf == NULL) {
             if_check(buf);
             break;
         }
+        // 尝试进行变量的赋值
+        // 防止echo a=$a这样的代码出现，如果等号前有空格，那么一定不是赋值语句
+        if ((strncmp(buf, "if ", 3) != 0) && (strncmp(buf, "else ", 5) != 0) &&
+            (strncmp(buf, "while ", 6) != 0) && (strncmp(buf, "elif ", 5) != 0) && (check_inside(buf) != 1)) {
+            int assigned = value_assign(buf);
+            if (assigned == 0)
+                continue;
+        }
+
+        //if (eval(buf, newstr, MAXCMDLEN) == -1)
+        //{
+        //    fprintf(stderr, "line too long\n");
+        //    return 1;
+        //}
+        //printf("%s", newstr);
+
         if (*buf == '\0')   // 空行的情况
             continue;
-        char** args = splitline(buf);
-        if (if_check(buf) == OK_EXEC)
-            process(buf);   // 执行语句
+        char newstr[MAXCMDLEN];
+        // while
+        if (strncmp(buf, "while ", 6) == 0) {
+            char** tmplist = splitline(buf);
+            strcpy(buf, buf + 6);
+            set_loop_condition(buf);
+            char** lines = read_loop_block(fp);
+            int ret = execute_loop(lines);
+            if (ret == 1)
+                continue;
+        }
+
+        if (eval(buf, newstr, MAXCMDLEN) == -1) {
+            fprintf(stderr, "line too long\n");
+            return 1;
+        }
+        // printf("%s", newstr);
+        char** args = splitline(newstr);
+        if (if_check(newstr) == OK_EXEC)
+            process(newstr);   // 执行语句
+        
+
         /*
         // 特殊字符检查
         // 若当前读到了if，开始进入条件语句处理程序
